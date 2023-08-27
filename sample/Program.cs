@@ -21,13 +21,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
     options.OnDeleteCookie = cookieContext => CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
 });
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = LogtoDefaults.CookieScheme;
-    options.DefaultChallengeScheme = LogtoDefaults.AuthenticationScheme;
-    options.DefaultSignOutScheme = LogtoDefaults.AuthenticationScheme;
-})
-.AddLogto(options =>
+builder.Services.AddLogtoAuthentication(options =>
 {
     options.Endpoint = builder.Configuration["Logto:Endpoint"]!;
     options.AppId = builder.Configuration["Logto:AppId"]!;
@@ -41,6 +35,7 @@ builder.Services.AddAuthentication(options =>
     options.Resource = builder.Configuration["Logto:Resource"];
     options.GetClaimsFromUserInfoEndpoint = true;
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
