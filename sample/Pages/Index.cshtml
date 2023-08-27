@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    ViewData["Claims"] = User.Claims;
+}
+
+<div class="text-center">
+    <h1>Logto .Net sample</h1>
+    <h2>Is authenticated?</h2>
+    <p>@User.Identity?.IsAuthenticated</p>
+    <h2>ID token claims</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in (IEnumerable<System.Security.Claims.Claim>)(ViewData["Claims"] ?? new
+            List<System.Security.Claims.Claim>()))
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
