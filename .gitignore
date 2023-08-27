@@ -21,6 +21,7 @@ appsettings.json
 appsettings.*.json
 
 # misc
+.vscode
 cache
 .*cache
 .DS_Store

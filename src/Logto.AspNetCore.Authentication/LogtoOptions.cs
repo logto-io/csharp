@@ -51,6 +51,12 @@ public class LogtoOptions
   /// </summary>
   public string CallbackPath { get; set; } = "/Callback";
   /// <summary>
+  /// The callback path for the OpenID Connect sign-out response. (default: "/SignedOutCallback")
+  /// <br/>
+  /// The full URI after appending the callback path will be used as the redirect URI for the OpenID Connect sign-out request.
+  /// </summary>
+  public string SignedOutCallbackPath { get; set; } = "/SignedOutCallback";
+  /// <summary>
   /// Boolean to set whether get claims from OpenID Connect userinfo endpoint. (default: false)
   /// <br/>
   /// For some claims that may be in a large size, such as `custom_data` and `identities`, it is required to

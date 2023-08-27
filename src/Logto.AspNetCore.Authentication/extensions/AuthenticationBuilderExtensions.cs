@@ -9,7 +9,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 /// <summary>
 /// Extension methods to configure Logto authentication.
@@ -62,7 +61,7 @@ public static class AuthenticationBuilderExtensions
       .AddOptions<CookieAuthenticationOptions>(cookieScheme)
       .Configure((options) => ConfigureCookieOptions(authenticationScheme, options, logtoOptions));
     builder.AddCookie(cookieScheme);
-    builder.AddOpenIdConnect(authenticationScheme, oidcOptions => ConfigureOpenIdConnectOptions(oidcOptions, logtoOptions));
+    builder.AddOpenIdConnect(authenticationScheme, oidcOptions => ConfigureOpenIdConnectOptions(oidcOptions, logtoOptions, cookieScheme));
 
     return builder;
   }
@@ -85,7 +84,7 @@ public static class AuthenticationBuilderExtensions
   /// </summary>
   /// <param name="options">The OpenID Connect options to configure.</param>
   /// <param name="logtoOptions">The Logto options to use for configuration.</param>
-  private static void ConfigureOpenIdConnectOptions(OpenIdConnectOptions options, LogtoOptions logtoOptions)
+  private static void ConfigureOpenIdConnectOptions(OpenIdConnectOptions options, LogtoOptions logtoOptions, string cookieScheme)
   {
     options.Authority = logtoOptions.Endpoint + "oidc";
     options.ClientId = logtoOptions.AppId;
@@ -96,16 +95,21 @@ public static class AuthenticationBuilderExtensions
     options.UsePkce = true;
     options.Prompt = logtoOptions.Prompt;
     options.CallbackPath = new PathString(logtoOptions.CallbackPath);
+    options.SignedOutCallbackPath = new PathString(logtoOptions.SignedOutCallbackPath);
     options.GetClaimsFromUserInfoEndpoint = logtoOptions.GetClaimsFromUserInfoEndpoint;
     options.MapInboundClaims = false;
     options.ClaimActions.MapAllExcept("nbf", "nonce", "c_hash", "at_hash");
     options.Events = new OpenIdConnectEvents
     {
-      OnRedirectToIdentityProvider = context =>
+      OnRedirectToIdentityProviderForSignOut = async context =>
       {
-        context.ProtocolMessage.SetParameter("audience", logtoOptions.Resource);
-        return Task.CompletedTask;
-      }
+        // Clean up the cookie when signing out.
+        await context.HttpContext.SignOutAsync(cookieScheme);
+
+        // Rebuild parameters since we use <c>client_id</c> for sign-out, no need to use <c>id_token_hint</c>.
+        context.ProtocolMessage.Parameters.Remove(OpenIdConnectParameterNames.IdTokenHint);
+        context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.ClientId, logtoOptions.AppId);
+      },
     };
     options.TokenValidationParameters = new TokenValidationParameters
     {

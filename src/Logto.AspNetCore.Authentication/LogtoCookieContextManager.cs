@@ -51,7 +51,7 @@ public class LogtoCookieContextManager
   /// </summary>
   public async Task Handle()
   {
-    Console.WriteLine("Validating principal...");
+    Debug.WriteLine("Validating principal...");
 
     // Reject the principal if the authentication scheme has been explicitly set to something other than
     // the scheme configured for Logto authentication.
@@ -99,11 +99,11 @@ public class LogtoCookieContextManager
       !LogtoUtils.IsExpired(tokenSet.GetValueOrDefault(expiredAtKey))
     )
     {
-      Console.WriteLine("Token not expired. No need to refresh.");
+      Debug.WriteLine("Token not expired. No need to refresh.");
       return true;
     }
 
-    Console.WriteLine("Token expired. Refreshing tokens...");
+    Debug.WriteLine("Token expired. Refreshing tokens...");
 
     var refreshToken = tokenSet.GetValueOrDefault(LogtoParameters.Tokens.RefreshToken);
 
@@ -176,7 +176,7 @@ public class LogtoCookieContextManager
       body["resource"] = logtoOptions.Resource!;
     }
 
-    // TODO: The token endpoint should be read from the discovery endpoint.
+    // TODO: The token endpoint should be read from the discovery endpoint or the OpenID Connect context.
     var request = new HttpRequestMessage(HttpMethod.Post, $"{logtoOptions.Endpoint}/oidc/token")
     {
       Content = new FormUrlEncodedContent(body)

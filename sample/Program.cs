@@ -25,6 +25,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = LogtoDefaults.CookieScheme;
     options.DefaultChallengeScheme = LogtoDefaults.AuthenticationScheme;
+    options.DefaultSignOutScheme = LogtoDefaults.AuthenticationScheme;
 })
 .AddLogto(options =>
 {
@@ -60,16 +61,12 @@ app.MapRazorPages();
 // Print debug info when receiving a request.
 app.Use(async (context, next) =>
 {
-    Console.WriteLine("Request:");
-    Console.WriteLine(context.Request.Path);
+    Console.Write("Request: ");
+    Console.Write(context.Request.Method + " ");
+    Console.Write(context.Request.Path);
     Console.WriteLine();
 
     await next.Invoke();
-});
-
-app.MapGet("/SignIn", (HttpContext context) =>
-{
-    return context.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
 });
 
 app.Run();
