@@ -5,22 +5,20 @@
   </auto-generated>   
 -->
 
-# LogtoCookieContextManager.Handle Method
+# LogtoParameters.Claims.Issuer Field
 
-**Declaring Type:** [LogtoCookieContextManager](../index.md)  
-**Namespace:** [Logto.AspNetCore.Authentication](../../index.md)  
+**Declaring Type:** [LogtoParameters.Claims](../index.md)  
+**Namespace:** [Logto.AspNetCore.Authentication](../../../index.md)  
 **Assembly:** Logto.AspNetCore.Authentication  
 **Assembly Version:** 0.1.0\-alpha.0
 
 ```csharp
-[AsyncStateMachine(Logto.AspNetCore.Authentication.LogtoCookieContextManager/<Handle>d__9)]
-[DebuggerStepThrough]
-public Task Handle();
+public const string Issuer;
 ```
 
-## Returns
+## Field Value
 
-Task
+string
 
 ___
 

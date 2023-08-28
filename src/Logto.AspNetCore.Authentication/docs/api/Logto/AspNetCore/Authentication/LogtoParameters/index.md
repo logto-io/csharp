@@ -21,6 +21,7 @@ public static class LogtoParameters
 
 | Name                                      | Description |
 | ----------------------------------------- | ----------- |
+| [LogtoParameters.Claims](Claims/index.md) |             |
 | [LogtoParameters.Scopes](Scopes/index.md) |             |
 | [LogtoParameters.Tokens](Tokens/index.md) |             |
 

@@ -14,6 +14,7 @@
 
 ```csharp
 [AsyncStateMachine(Logto.AspNetCore.Authentication.LogtoCookieContextManager/<RefreshTokens>d__10)]
+[DebuggerStepThrough]
 public Task<bool> RefreshTokens(bool forResource = false);
 ```
 
