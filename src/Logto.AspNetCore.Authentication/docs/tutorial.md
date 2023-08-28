@@ -50,6 +50,12 @@ The `AddLogtoAuthentication` method will do the following things:
 
 ### Sign-in
 
+Add the following URI to the `Redirect URIs` list in the Logto application details page:
+
+```
+http://<your-web-app-uri>/Callback
+```
+
 To sign-in with Logto, you can use the `ChallengeAsync` method:
 
 ```csharp
@@ -83,6 +89,12 @@ Remember to update the value in the Logto application details page accordingly.
 > No need to set the **application redirect URI** in the Logto application details page.
 
 ### Sign-out
+
+Add the following URI to the `Post sign-out redirect URIs` list in the Logto application details page:
+
+```
+http://<your-web-app-uri>/SignedOutCallback
+```
 
 To sign-out with Logto, you can use the `SignOutAsync` method:
 
