@@ -11,5 +11,11 @@ The monorepo for Logto SDKs written in C#.
 - [src/Logto.AspNetCore.Authentication.Tests](./src/Logto.AspNetCore.Authentication.Tests): Tests for the ASP.NET Core authentication middleware.
 - [sample](./sample): Sample ASP.NET Core web application that shows how to use the ASP.NET Core authentication middleware.
 
+## Resources
+
+- [Logto website][Website]
+- [Logto documentation](https://docs.logto.io/)
+- [Join Discord][Discord]
+
 [Website]: https://logto.io/
 [Discord]: https://discord.gg/vRvwuwgpVX
