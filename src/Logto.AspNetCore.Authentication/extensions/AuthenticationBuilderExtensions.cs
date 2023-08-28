@@ -91,7 +91,6 @@ public static class AuthenticationBuilderExtensions
     options.ClientSecret = logtoOptions.AppSecret;
     options.ResponseType = OpenIdConnectResponseType.Code;
     options.SaveTokens = true;
-    options.GetClaimsFromUserInfoEndpoint = true;
     options.UsePkce = true;
     options.Prompt = logtoOptions.Prompt;
     options.CallbackPath = new PathString(logtoOptions.CallbackPath);

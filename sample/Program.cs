@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
 using Logto.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +42,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
+
 app.UseStaticFiles();
 
 app.UseRouting();

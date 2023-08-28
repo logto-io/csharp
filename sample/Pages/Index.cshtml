@@ -9,9 +9,9 @@
     <form method="post">
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <button type="submit">Sign out</button>
+            <button type="submit" asp-page-handler="SignOut">Sign out</button>
         } else {
-            <button type="submit">Sign in</button>
+            <button type="submit" asp-page-handler="SignIn">Sign in</button>
         }
     </form>
     <h2>Is authenticated?</h2>

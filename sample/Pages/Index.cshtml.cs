@@ -20,15 +20,13 @@ public class IndexModel : PageModel
         ViewData["AccessTokenForResource"] = await HttpContext.GetTokenAsync(LogtoParameters.Tokens.AccessTokenForResource);
     }
 
-    public async Task OnPostAsync()
+    public async Task OnPostSignInAsync()
     {
-        if (User.Identity?.IsAuthenticated == true)
-        {
-            await HttpContext.SignOutAsync(new AuthenticationProperties { RedirectUri = "/" });
-        }
-        else
-        {
-            await HttpContext.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
-        }
+        await HttpContext.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
+    }
+
+    public async Task OnPostSignOutAsync()
+    {
+        await HttpContext.SignOutAsync(new AuthenticationProperties { RedirectUri = "/" });
     }
 }
