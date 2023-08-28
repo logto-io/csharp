@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Logto.AspNetCore.Authentication</PackageId>
-    <Version>0.1.0-alpha.1</Version>
+    <Version>0.1.0</Version>
     <Description>Logto ASP.Net Core authentication SDK.</Description>
     <Authors>Logto</Authors>
     <Company>Silverhand, Inc.</Company>
