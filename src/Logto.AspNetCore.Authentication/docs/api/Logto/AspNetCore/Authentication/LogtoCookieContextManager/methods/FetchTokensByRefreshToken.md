@@ -14,6 +14,7 @@
 
 ```csharp
 [AsyncStateMachine(Logto.AspNetCore.Authentication.LogtoCookieContextManager/<FetchTokensByRefreshToken>d__11)]
+[DebuggerStepThrough]
 public Task<LogtoTokenResponse> FetchTokensByRefreshToken(string refreshToken, bool forResource);
 ```
 

@@ -179,7 +179,7 @@ var claims = User.Claims;
 var userId = claims.FirstOrDefault(c => c.Type == LogtoParameters.Claims.Subject)?.Value;
 ```
 
-See `LogtoParameters.Claims` for the list of claim names and their meanings.
+See [`LogtoParameters.Claims`](./api/Logto/AspNetCore/Authentication/LogtoParameters/Claims/index.md) for the list of claim names and their meanings.
 
 ### Some claims are missing
 
@@ -207,7 +207,7 @@ builder.Services.AddLogtoAuthentication(options =>
 > **Note**
 > For now, there's no way to remove the default scopes without mutating the `scopes` list.
 
-See `LogtoParameters.Scopes` for a list of supported scopes and its mapped claims.
+See [`LogtoParameters.Scopes`](./api/Logto/AspNetCore/Authentication/LogtoParameters/Scopes/index.md) for a list of supported scopes and its mapped claims.
 
 ### Special ID token claims
 
@@ -223,8 +223,8 @@ builder.Services.AddLogtoAuthentication(options =>
 
 Currently, the following claims are not included in the ID token:
 
-- `LogtoParameters.Claims.CustomData` (`"custom_data"`)
-- `LogtoParameters.Claims.Identities` (`"identities"`)
+- `LogtoParameters.Claims.CustomData` (use `LogtoParameters.Scopes.CustomData` to fetch)
+- `LogtoParameters.Claims.Identities` (use `LogtoParameters.Scopes.Identities` to fetch)
 
 ## API resources
 

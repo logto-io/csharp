@@ -19,6 +19,7 @@
 | [LogtoDefaults](LogtoDefaults/index.md)                                     |             |
 | [LogtoOptions](LogtoOptions/index.md)                                       |             |
 | [LogtoParameters](LogtoParameters/index.md)                                 |             |
+| [LogtoParameters.Claims](LogtoParameters/Claims/index.md)                   |             |
 | [LogtoParameters.Scopes](LogtoParameters/Scopes/index.md)                   |             |
 | [LogtoParameters.Tokens](LogtoParameters/Tokens/index.md)                   |             |
 | [LogtoTokenResponse](LogtoTokenResponse/index.md)                           |             |

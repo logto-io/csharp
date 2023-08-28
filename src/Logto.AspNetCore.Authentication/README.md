@@ -26,6 +26,14 @@ dotnet add package Logto.AspNetCore.Authentication
 
 See [tutorial](./docs/tutorial.md) for a quick start.
 
+## API reference
+
+See [API reference](./docs/api/Logto/AspNetCore/Authentication/index.md) for more details.
+
+## Sample project
+
+See [sample](../../sample/) directory for a runnable sample project.
+
 [Website]: https://logto.io/
 [NuGet]: https://www.nuget.org/packages/Logto.AspNetCore.Authentication/
 [Discord]: https://discord.gg/vRvwuwgpVX
