@@ -11,6 +11,7 @@ This tutorial will show you how to use Logto ASP.NET Core authentication middlew
     - [Sign-in](#sign-in)
     - [Sign-out](#sign-out)
     - [Implement sign-in/sign-out buttons (Razor Pages)](#implement-sign-insign-out-buttons-razor-pages)
+    - [Implement sign-in/sign-out buttons (MVC)](#implement-sign-insign-out-buttons-mvc)
     - [Checkpoint: Run the web application](#checkpoint-run-the-web-application)
   - [The user object](#the-user-object)
     - [Some claims are missing](#some-claims-are-missing)
@@ -169,14 +170,48 @@ Then, add the buttons to your Razor page:
 
 It will show the "Sign in" button if the user is not authenticated, and show the "Sign out" button if the user is authenticated.
 
+### Implement sign-in/sign-out buttons (MVC)
+
+First, add actions methods to your `Controller`, for example:
+
+```csharp
+public class HomeController : Controller
+{
+  public IActionResult SignIn()
+  {
+    return Challenge(new AuthenticationProperties { RedirectUri = "/" });
+  }
+
+  // Use the `new` keyword to avoid conflict with the `ControllerBase.SignOut` method
+  new public IActionResult SignOut()
+  {
+    return SignOut(new AuthenticationProperties { RedirectUri = "/" });
+  }
+}
+```
+
+Then, add the links to your View:
+
+```html
+<p>Is authenticated: @User.Identity?.IsAuthenticated</p>
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <a asp-controller="Home" asp-action="SignOut">Sign out</a>
+} else {
+    <a asp-controller="Home" asp-action="SignIn">Sign in</a>
+}
+```
+
+It will show the "Sign in" link if the user is not authenticated, and show the "Sign out" link if the user is authenticated.
+
 ### Checkpoint: Run the web application
 
 Now you can run the web application and try to sign-in/sign-out with Logto:
 
-1. Open the web application in your browser, you should see "Is authenticated: False" and the "Sign in" button.
-2. Click the "Sign in" button, and you should be redirected to the Logto sign-in page.
-3. After you have signed in, you should be redirected back to the web application, and you should see "Is authenticated: True" and the "Sign out" button.
-4. Click the "Sign out" button, and you should be redirected to the Logto sign-out page, and then redirected back to the web application.
+1. Open the web application in your browser, you should see "Is authenticated: False" and the "Sign in" button (link).
+2. Click the "Sign in" button (link), and you should be redirected to the Logto sign-in page.
+3. After you have signed in, you should be redirected back to the web application, and you should see "Is authenticated: True" and the "Sign out" button (link).
+4. Click the "Sign out" button (link), and you should be redirected to the Logto sign-out page, and then redirected back to the web application.
 
 ## The user object
 

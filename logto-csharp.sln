@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logto.AspNetCore.Authentica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "logto-csharp-sample", "sample\logto-csharp-sample.csproj", "{63F09EFF-03EB-4A80-BC46-1F40CCF4CD2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-mvc", "sample-mvc\sample-mvc.csproj", "{2C4D9EC2-8697-4217-82E8-953835F990CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{63F09EFF-03EB-4A80-BC46-1F40CCF4CD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63F09EFF-03EB-4A80-BC46-1F40CCF4CD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63F09EFF-03EB-4A80-BC46-1F40CCF4CD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4D9EC2-8697-4217-82E8-953835F990CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4D9EC2-8697-4217-82E8-953835F990CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4D9EC2-8697-4217-82E8-953835F990CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4D9EC2-8697-4217-82E8-953835F990CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D05B1B5F-D560-492A-A566-95888C8C5C43} = {D44D6C8F-1A29-4796-930F-B37ADB539EA3}

@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Logto sample for MVC</h1>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <a asp-controller="Home" asp-action="SignOut">Sign out</a>
+    } else {
+        <a asp-controller="Home" asp-action="SignIn">Sign in</a>
+    }
+    <h2>Is authenticated?</h2>
+    <p>@User.Identity?.IsAuthenticated</p>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <h2>ID token claims</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in (IEnumerable<System.Security.Claims.Claim>)(User.Claims ?? new
+                List<System.Security.Claims.Claim>()))
+                {
+                    <tr>
+                        <td>@claim.Type</td>
+                        <td>@claim.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (ViewData["Resource"] != null)
+    {
+        <h2>Resource</h2>
+        <p>@ViewData["Resource"]</p>
+        <p>@ViewData["AccessTokenForResource"]</p>
+    }
+</div>
