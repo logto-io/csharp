@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// This configuration only applies to the local HTTP development environment.
+// Production deployments should use a more secure configuration.
 static void CheckSameSite(HttpContext httpContext, CookieOptions options)
 {
     if (options.SameSite == SameSiteMode.None && options.Secure == false)
