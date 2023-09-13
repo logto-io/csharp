@@ -28,6 +28,7 @@ public class HomeController : Controller
         return Challenge(new AuthenticationProperties { RedirectUri = "/" });
     }
 
+    // Use the `new` keyword to avoid conflict with the `ControllerBase.SignOut` method
     new public IActionResult SignOut()
     {
         return SignOut(new AuthenticationProperties { RedirectUri = "/" });
