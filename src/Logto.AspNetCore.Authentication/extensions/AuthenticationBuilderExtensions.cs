@@ -113,7 +113,7 @@ public static class AuthenticationBuilderExtensions
     options.TokenValidationParameters = new TokenValidationParameters
     {
       NameClaimType = "name",
-      RoleClaimType = "role",
+      RoleClaimType = "roles",
       ValidateAudience = true,
       ValidAudience = logtoOptions.AppId,
       ValidateIssuer = true,
