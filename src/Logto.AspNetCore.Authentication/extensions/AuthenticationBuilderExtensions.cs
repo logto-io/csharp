@@ -73,6 +73,7 @@ public static class AuthenticationBuilderExtensions
   {
     options.Cookie.Name = $"Logto.Cookie.{logtoOptions.AppId}";
     options.SlidingExpiration = true;
+    options.Cookie.Domain = logtoOptions.CookieDomain;
     options.Events = new CookieAuthenticationEvents
     {
       OnValidatePrincipal = context => new LogtoCookieContextManager(authenticationScheme, context).Handle()
