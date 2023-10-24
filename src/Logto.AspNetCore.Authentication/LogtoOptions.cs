@@ -63,6 +63,10 @@ public class LogtoOptions
   /// set this value to `true` since they are not included in the ID token.
   /// </summary>
   public bool GetClaimsFromUserInfoEndpoint { get; set; } = false;
+  /// <summary>
+  /// The domain to associate the cookie with. Allows multiple applications to share the cookie such as on sub-domains. 
+  /// </summary>
+  public string? CookieDomain { get; set; } = null;
 }
 
 /// <summary>
@@ -78,8 +82,5 @@ public static class PromptMode
   /// The user will be prompted for sign-in again anyway. Note there will be no refresh token returned in this case.
   /// </summary>
   public const string Login = "login";
-  /// <summary>
-  /// The domain to associate the cookie with. Allows multiple applications to share the cookie such as on sub-domains. 
-  /// </summary>
-  public string? CookieDomain { get; set; } = null;
+
 }
