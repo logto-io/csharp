@@ -63,6 +63,10 @@ public class LogtoOptions
   /// set this value to `true` since they are not included in the ID token.
   /// </summary>
   public bool GetClaimsFromUserInfoEndpoint { get; set; } = false;
+  /// <summary>
+  /// The domain to associate the cookie with. Allows multiple applications to share the cookie such as on sub-domains. 
+  /// </summary>
+  public string? CookieDomain { get; set; } = null;
 }
 
 /// <summary>
