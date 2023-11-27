@@ -137,7 +137,13 @@ public static class AuthenticationBuilderExtensions
     }
 
     // Handle resource
-    if (!string.IsNullOrEmpty(logtoOptions.Resource))
+    if (logtoOptions.IsOrganizationsScopeRequested) {
+      if (!string.IsNullOrEmpty(logtoOptions.Resource)) {
+        throw new ArgumentException($"The {nameof(LogtoOptions.Resource)} must be null when requesting the {LogtoParameters.Scopes.Organizations} scope.");
+      }
+
+      options.Resource = LogtoParameters.ReservedResource.Organizations;
+    } else if (!string.IsNullOrEmpty(logtoOptions.Resource))
     {
       options.Resource = logtoOptions.Resource;
     }

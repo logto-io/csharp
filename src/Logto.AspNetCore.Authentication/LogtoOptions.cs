@@ -32,6 +32,8 @@ public class LogtoOptions
   /// <summary>
   /// The API resource that your application needs to access.
   /// See <a href="https://docs.logto.io/docs/recipes/rbac/">RBAC</a> to learn more about how to use role-based access control (RBAC) to protect API resources.
+  /// <br/>
+  /// If <see cref="LogtoParameters.Scopes.Organizations" /> is specified in <see cref="Scopes"/>, this value must not be set.
   /// </summary>
   public string? Resource { get; set; } = null;
   /// <summary>
@@ -63,6 +65,10 @@ public class LogtoOptions
   /// set this value to `true` since they are not included in the ID token.
   /// </summary>
   public bool GetClaimsFromUserInfoEndpoint { get; set; } = false;
+  /// <summary>
+  /// Get if `Scopes` contains `LogtoParameters.Scopes.Organizations`.
+  /// </summary>
+  public bool IsOrganizationsScopeRequested => Scopes.Contains(LogtoParameters.Scopes.Organizations);
 }
 
 /// <summary>

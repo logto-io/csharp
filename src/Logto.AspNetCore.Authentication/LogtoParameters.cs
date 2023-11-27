@@ -51,6 +51,18 @@ public static class LogtoParameters
     /// Note that when requesting this scope, you must set <see cref="LogtoOptions.GetClaimsFromUserInfoEndpoint"/> to <c>true</c>.
     /// </summary>
     public const string Identities = "identities";
+    /// <summary>
+    /// The scope for user's organization IDs and perform organization token grant per <see href="https://github.com/logto-io/rfcs">RFC 0001</see>.
+    /// <br/>
+    /// To learn more about Logto Organizations, see <see href="https://docs.logto.io/docs/recipes/organizations/" />.
+    /// </summary>
+    public const string Organizations = "urn:logto:scope:organizations";
+    /// <summary>
+    /// Scope for user's organization roles per <see href="https://github.com/logto-io/rfcs">RFC 0001</see>.
+    /// <br/>
+    /// To learn more about Logto Organizations, see <see href="https://docs.logto.io/docs/recipes/organizations/" />.
+    /// </summary>
+    public const string OrganizationRoles = "urn:logto:scope:organization_roles";
   }
 
   /// <summary>
@@ -114,5 +126,24 @@ public static class LogtoParameters
     /// The claim name for user's identities.
     /// </summary>
     public const string Identities = "identities";
+    /// <summary>
+    /// The claim name for user's organization IDs.
+    /// </summary>
+    public const string Organizations = "organizations";
+    /// <summary>
+    /// The claim name for user's organization roles. Each role is in the format of `<organization_id>:<role_name>`.
+    /// </summary>
+    public const string OrganizationRoles = "organization_roles";
+  }
+
+  /// <summary>
+  /// Resources that reserved by Logto, which cannot be defined by users.
+  /// </summary>
+  public static class ReservedResource
+  {
+    /// <summary>
+    /// The resource for organization template per <see href="https://github.com/logto-io/rfcs">RFC 0001</see>.
+    /// </summary>
+    public const string Organizations = "urn:logto:resource:organizations";
   }
 }
