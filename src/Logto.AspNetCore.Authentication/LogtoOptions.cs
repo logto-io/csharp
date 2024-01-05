@@ -82,4 +82,5 @@ public static class PromptMode
   /// The user will be prompted for sign-in again anyway. Note there will be no refresh token returned in this case.
   /// </summary>
   public const string Login = "login";
+
 }
