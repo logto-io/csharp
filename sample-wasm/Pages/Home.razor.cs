@@ -38,16 +38,15 @@ public partial class Home : ComponentBase
         StateHasChanged();
     }
 
-      private async Task OnLoginButtonClickAsync(MouseEventArgs obj)
-        {
-            await UserManager.SignInRedirectAsync();
-        }
+    private async Task OnLoginButtonClickAsync(MouseEventArgs obj)
+    {
+        await UserManager.SignInRedirectAsync();
+    }
 
-        private async Task OnLogoutButtonClickAsync(MouseEventArgs obj)
-        {
-            await UserManager.SignOutRedirectAsync();
-        }
-
+    private async Task OnLogoutButtonClickAsync(MouseEventArgs obj)
+    {
+        await UserManager.SignOutRedirectAsync();
+    }
 
     public void Dispose()
     {

@@ -15,10 +15,8 @@
                     <li>Email verified: @(@User?.Profile?.EmailVerified ?? false)</li>
                 </ul>
                 <p>Access token: @(@User?.AccessToken ?? "(null)")</p>
-                <button
-                    class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
-                    @onclick="OnLogoutButtonClickAsync"
-                >
+                <button class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="OnLogoutButtonClickAsync">
                     Sign out
                 </button>
             </Authorized>
@@ -26,10 +24,8 @@
                 <p class="text-amber-600 text-s font-bold">
                     You are not signed in.
                 </p>
-                <button
-                    class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
-                    @onclick="OnLoginButtonClickAsync"
-                >
+                <button class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="OnLoginButtonClickAsync">
                     Sign in
                 </button>
             </NotAuthorized>

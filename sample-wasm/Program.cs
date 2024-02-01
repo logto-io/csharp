@@ -27,5 +27,4 @@ await webAssemblyHost
         await documentService.InjectOpenIdConnectAsync();
     });
 
-
 await webAssemblyHost.RunAsync();

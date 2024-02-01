@@ -27,7 +27,7 @@ Create an `appsettings.Development.json` (or `appsettings.json`) with the follow
     "PostLogoutRedirectUri": "<your-app-url>", // Remember to configure this in Logto
     "RedirectUri": "<your-app-url>", // Remember to configure this in Logto
     "ResponseType": "code",
-    "Scope": "openid profile" // add more scopes if needed
+    "Scope": "openid profile" // Add more scopes if needed
   }
 }
 ```
