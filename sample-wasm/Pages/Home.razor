@@ -3,22 +3,36 @@
 <section class="p-4 flex flex-col gap-2">
     <h1 class="text-2xl font-bold">Logto Blazor WASM sample</h1>
     <p>This is the sample application for Logto integration with Blazor WASM.</p>
-
-    <AuthorizeView>
-        <Authorized>
-            <section class="flex">
+    <section class="space-y-2">
+        <AuthorizeView>
+            <Authorized>
                 <p class="text-emerald-700 text-s font-bold">
                     You are signed in as @(@User?.Profile?.Name ?? "(unknown name)").
                 </p>
-            </section>
-            <ul>
-               
-            </ul>
-
-            <p>Access token: @User?.AccessToken</p>
-        </Authorized>
-        <NotAuthorized>
-            <button class="nav-link btn btn-link" @onclick="OnLoginButtonClickAsync">Sign in</button>
-        </NotAuthorized>
-    </AuthorizeView>
+                <h2 class="text-xl font-bold">Profile</h2>
+                <ul class="list-disc list-inside">
+                    <li>Email: @(@User?.Profile?.Email ?? "(null)")</li>
+                    <li>Email verified: @(@User?.Profile?.EmailVerified ?? false)</li>
+                </ul>
+                <p>Access token: @(@User?.AccessToken ?? "(null)")</p>
+                <button
+                    class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="OnLogoutButtonClickAsync"
+                >
+                    Sign out
+                </button>
+            </Authorized>
+            <NotAuthorized>
+                <p class="text-amber-600 text-s font-bold">
+                    You are not signed in.
+                </p>
+                <button
+                    class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="OnLoginButtonClickAsync"
+                >
+                    Sign in
+                </button>
+            </NotAuthorized>
+        </AuthorizeView>
+    </section>
 </section>
