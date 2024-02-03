@@ -1,8 +1,11 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@using Logto.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject IHttpContextAccessor HttpContextAccessor
 @rendermode InteractiveServer
 
 <PageTitle>Logto Blazor Server sample</PageTitle>
@@ -23,9 +26,18 @@
                     List<System.Security.Claims.Claim>()))
                     {
                         <li>
-                            @claim.Type: @claim.Value
+                            <b>@claim.Type:</b> @claim.Value
                         </li>
                     }
+                </ul>
+                <h2 class="text-xl font-bold">Tokens</h2>
+                <ul>
+                    <li>
+                        <b>Resource:</b> @(Resource ?? "(null)")
+                    </li>
+                    <li>
+                        <b>Access token:</b> @(AccessToken ?? "(null)")
+                    </li>
                 </ul>
                 <button class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
                     @onclick="SignOut">
@@ -48,11 +60,18 @@
 
 @code {
     private ClaimsPrincipal? User { get; set; }
+    private string? AccessToken { get; set; }
+    private string? Resource { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         User = authState.User;
+
+        if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            await LoadTokens();
+        }
     }
 
     private void SignIn()
@@ -63,5 +82,19 @@
     private void SignOut()
     {
         NavigationManager.NavigateTo("/SignOut", forceLoad: true);
+    }
+
+    private async Task LoadTokens()
+    {
+        var httpContext = HttpContextAccessor.HttpContext;
+        if (httpContext == null)
+        {
+            return;
+        }
+
+        var logtoOptions = httpContext.GetLogtoOptions();
+        Resource = logtoOptions?.Resource;
+        // Replace with other token types if needed
+        AccessToken = await httpContext.GetTokenAsync(LogtoParameters.Tokens.AccessTokenForResource);
     }
 }
