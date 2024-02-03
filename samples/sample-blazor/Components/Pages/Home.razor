@@ -70,7 +70,7 @@
 
         if (User?.Identity?.IsAuthenticated ?? false)
         {
-            await LoadTokens();
+            await FetchTokenAsync();
         }
     }
 
@@ -84,7 +84,7 @@
         NavigationManager.NavigateTo("/SignOut", forceLoad: true);
     }
 
-    private async Task LoadTokens()
+    private async Task FetchTokenAsync()
     {
         var httpContext = HttpContextAccessor.HttpContext;
         if (httpContext == null)
