@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "logto_csharp_sample": {
+    "sample": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

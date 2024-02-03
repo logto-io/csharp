@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace logto_csharp_sample.Pages;
+namespace sample.Pages;
 
 public class IndexModel : PageModel
 {

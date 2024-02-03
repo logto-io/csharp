@@ -4,14 +4,14 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>logto_csharp_sample</RootNamespace>
+    <RootNamespace>sample</RootNamespace>
     <IsPackable>false</IsPackable>
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference
-      Include="..\src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj" />
+      Include="..\..\src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj" />
   </ItemGroup>
 
 </Project>
