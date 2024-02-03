@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj" />
+    <ProjectReference Include="..\..\src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

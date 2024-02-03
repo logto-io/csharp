@@ -7,11 +7,17 @@ The monorepo for Logto SDKs written in C#.
 
 ## Contents
 
+### Packages
+
 - [src/Logto.AspNetCore.Authentication](./src/Logto.AspNetCore.Authentication): ASP.NET Core authentication middleware for Logto.
 - [src/Logto.AspNetCore.Authentication.Tests](./src/Logto.AspNetCore.Authentication.Tests): Tests for the ASP.NET Core authentication middleware.
-- [sample](./sample): Sample ASP.NET Core web application that shows how to use the ASP.NET Core authentication middleware.
-- [sample-mvc](./sample-mvc): Sample ASP.NET Core web MVC application that shows how to use the ASP.NET Core authentication middleware.
-- [sample-wasm](./sample-wasm): Sample Blazor WebAssembly application that shows how to use Blorc.OpenIdConnect to authenticate users with Logto.
+
+### Samples
+
+- [sample](./samples/sample): Sample ASP.NET Core web application that shows how to use the ASP.NET Core authentication middleware.
+- [sample-mvc](./samples/sample-mvc): Sample ASP.NET Core web MVC application that shows how to use the ASP.NET Core authentication middleware.
+- [sample-wasm](./samples/sample-wasm): Sample Blazor WebAssembly application that shows how to use Blorc.OpenIdConnect to authenticate users with Logto.
+- [sample-blazor](./samples/sample-blazor): Sample Blazor Server application that shows how to use the ASP.NET Core authentication middleware.
 
 ## Resources
 
