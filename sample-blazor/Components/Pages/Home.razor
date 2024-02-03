@@ -1,0 +1,100 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using Logto.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IHttpContextAccessor HttpContextAccessor
+@rendermode InteractiveServer
+
+<PageTitle>Logto Blazor Server sample</PageTitle>
+
+<section class="p-4 flex flex-col gap-2">
+    <h1 class="text-2xl font-bold">Logto Blazor Server sample</h1>
+    <p>This is the sample application for Logto integration with Blazor Server (.NET 8 new template).</p>
+    <p>Authentication state: @(@User?.Identity?.IsAuthenticated ?? false)</p>
+    <section class="space-y-2">
+        <AuthorizeView>
+            <Authorized>
+                <p class="text-emerald-700 text-s font-bold">
+                    You are signed in as @(!string.IsNullOrWhiteSpace(@User?.Identity?.Name) ? @User?.Identity?.Name : "(unknown name)").
+                </p>
+                <h2 class="text-xl font-bold">Claims</h2>
+                <ul class="list-disc list-inside">
+                    @foreach (var claim in (IEnumerable<System.Security.Claims.Claim>)(User?.Claims ?? new
+                    List<System.Security.Claims.Claim>()))
+                    {
+                        <li>
+                            <b>@claim.Type:</b> @claim.Value
+                        </li>
+                    }
+                </ul>
+                <h2 class="text-xl font-bold">Tokens</h2>
+                <ul>
+                    <li>
+                        <b>Resource:</b> @(Resource ?? "(null)")
+                    </li>
+                    <li>
+                        <b>Access token:</b> @(AccessToken ?? "(null)")
+                    </li>
+                </ul>
+                <button class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="SignOut">
+                    Sign out
+                </button>
+            </Authorized>
+            <NotAuthorized>
+                <p class="text-amber-600 text-s font-bold">
+                    You are not signed in.
+                </p>
+                <button class="bg-violet-700 hover:bg-violet-800 text-white px-4 py-2 rounded text-sm"
+                    @onclick="SignIn">
+                    Sign in
+                </button>
+            </NotAuthorized>
+        </AuthorizeView>
+    </section>
+</section>
+
+
+@code {
+    private ClaimsPrincipal? User { get; set; }
+    private string? AccessToken { get; set; }
+    private string? Resource { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        User = authState.User;
+
+        if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            await LoadTokens();
+        }
+    }
+
+    private void SignIn()
+    {
+        NavigationManager.NavigateTo("/SignIn", forceLoad: true);
+    }
+
+    private void SignOut()
+    {
+        NavigationManager.NavigateTo("/SignOut", forceLoad: true);
+    }
+
+    private async Task LoadTokens()
+    {
+        var httpContext = HttpContextAccessor.HttpContext;
+        if (httpContext == null)
+        {
+            return;
+        }
+
+        var logtoOptions = httpContext.GetLogtoOptions();
+        Resource = logtoOptions?.Resource;
+        // Replace with other token types if needed
+        AccessToken = await httpContext.GetTokenAsync(LogtoParameters.Tokens.AccessTokenForResource);
+    }
+}
