@@ -14,12 +14,12 @@ builder.Services.AddLogtoAuthentication(options =>
     options.Endpoint = builder.Configuration["Logto:Endpoint"]!;
     options.AppId = builder.Configuration["Logto:AppId"]!;
     options.AppSecret = builder.Configuration["Logto:AppSecret"];
-    options.Scopes = new string[] {
+    options.Scopes = [
         LogtoParameters.Scopes.Email,
         LogtoParameters.Scopes.Phone,
         LogtoParameters.Scopes.CustomData,
         LogtoParameters.Scopes.Identities
-    };
+    ];
     options.Resource = builder.Configuration["Logto:Resource"];
     options.GetClaimsFromUserInfoEndpoint = true;
 });
