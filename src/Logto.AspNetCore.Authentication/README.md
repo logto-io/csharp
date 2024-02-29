@@ -14,21 +14,15 @@ ASP.NET Core authentication middleware for Logto.
 - A Logto traditional web application created
 - An ASP.NET Core web application created
 
-If you don't have the Logto application created, please follow the [⚡ Get started](https://docs.logto.io/docs/tutorials/get-started/) guide to create one.
+## Guide
+
+Check out our [docs](https://docs.logto.io/sdk/) and choose the right guide for your project.
 
 ## Installation
 
 ```bash
 dotnet add package Logto.AspNetCore.Authentication
 ```
-
-## Tutorial
-
-See [tutorial](https://github.com/logto-io/csharp/tree/HEAD/src/Logto.AspNetCore.Authentication/docs/tutorial.md) for a quick start.
-
-## API reference
-
-See [API reference](https://github.com/logto-io/csharp/tree/HEAD/src/Logto.AspNetCore.Authentication/docs/api/Logto/AspNetCore/Authentication/index.md) for more details.
 
 ## Sample project
 
