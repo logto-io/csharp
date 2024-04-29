@@ -20,14 +20,7 @@ builder.Services.AddCors(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(
-        options =>
-        {
-            options.Authority = "https://e24py9.logto.app/oidc";
-            options.RequireHttpsMetadata = false;
-            options.Audience = "http://localhost:5150";
-        });
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
 #region Logs
 
