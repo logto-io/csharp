@@ -177,7 +177,7 @@ public class LogtoCookieContextManager
     }
 
     // TODO: The token endpoint should be read from the discovery endpoint or the OpenID Connect context.
-    var request = new HttpRequestMessage(HttpMethod.Post, GetTokenRequestUri(logtoOptions.Endpoint))
+    var request = new HttpRequestMessage(HttpMethod.Post, GetOidcTokenRequestUri(logtoOptions.Endpoint))
     {
       Content = new FormUrlEncodedContent(body)
     };
@@ -192,10 +192,16 @@ public class LogtoCookieContextManager
     })!;
   }
 
-  public static Uri GetTokenRequestUri(string endpoint)
+  /// <summary>
+  /// Constructs a URI for the OpenID Connect (OIDC) token request based on the provided endpoint.
+  /// </summary>
+  /// <param name="endpoint">The base endpoint URL as a string.</param>
+  /// <returns>A <see cref="Uri"/> object representing the full token request URI.</returns>
+  /// <exception cref="UriFormatException">Thrown when the provided endpoint is not a valid URI.</exception>
+  public static Uri GetOidcTokenRequestUri(string endpoint)
   {
     var baseUri = new Uri(endpoint);
-    var requestUri = new Uri(baseUri, "/oidc/token");
+    var requestUri = new Uri(baseUri, "oidc/token");
     return requestUri;
   }
 }
