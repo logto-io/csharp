@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -78,7 +79,6 @@ public class LogtoCookieContextManager
     if (logtoOptions.Resource != null && !await RefreshTokens(true))
     {
       context.RejectPrincipal();
-      return;
     }
   }
 
@@ -177,7 +177,7 @@ public class LogtoCookieContextManager
     }
 
     // TODO: The token endpoint should be read from the discovery endpoint or the OpenID Connect context.
-    var request = new HttpRequestMessage(HttpMethod.Post, $"{logtoOptions.Endpoint}/oidc/token")
+    var request = new HttpRequestMessage(HttpMethod.Post, GetTokenRequestUri(logtoOptions.Endpoint))
     {
       Content = new FormUrlEncodedContent(body)
     };
@@ -190,5 +190,12 @@ public class LogtoCookieContextManager
     {
       PropertyNameCaseInsensitive = true,
     })!;
+  }
+
+  public static Uri GetTokenRequestUri(string endpoint)
+  {
+    var baseUri = new Uri(endpoint);
+    var requestUri = new Uri(baseUri, "/oidc/token");
+    return requestUri;
   }
 }
