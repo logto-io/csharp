@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Extension methods to configure Logto authentication.
@@ -101,15 +102,26 @@ public static class AuthenticationBuilderExtensions
     options.ClaimActions.MapAllExcept("nbf", "nonce", "c_hash", "at_hash");
     options.Events = new OpenIdConnectEvents
     {
+      OnRedirectToIdentityProvider = context =>
+      {
+        if (context.Properties.Parameters.TryGetValue("first_screen", out var firstScreen))
+        {
+          context.ProtocolMessage.Parameters.Add("first_screen", firstScreen?.ToString());
+        }
+
+        if (context.Properties.Parameters.TryGetValue("identifiers", out var identifiers))
+        {
+          context.ProtocolMessage.Parameters.Add("identifiers", identifiers?.ToString());
+        }
+
+        return Task.CompletedTask;
+      },
       OnRedirectToIdentityProviderForSignOut = async context =>
       {
-        // Clean up the cookie when signing out.
         await context.HttpContext.SignOutAsync(cookieScheme);
-
-        // Rebuild parameters since we use <c>client_id</c> for sign-out, no need to use <c>id_token_hint</c>.
         context.ProtocolMessage.Parameters.Remove(OpenIdConnectParameterNames.IdTokenHint);
         context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.ClientId, logtoOptions.AppId);
-      },
+      }
     };
     options.TokenValidationParameters = new TokenValidationParameters
     {

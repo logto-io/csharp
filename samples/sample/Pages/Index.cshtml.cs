@@ -22,7 +22,18 @@ public class IndexModel : PageModel
 
     public async Task OnPostSignInAsync()
     {
-        await HttpContext.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
+        var authProperties = new AuthenticationProperties 
+        { 
+            RedirectUri = "/" 
+        };
+
+        authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
+        authProperties.SetParameter("identifiers", string.Join(",", new[] 
+        { 
+            LogtoParameters.Authentication.Identifiers.Username,
+        }));
+
+        await HttpContext.ChallengeAsync(authProperties);
     }
 
     public async Task OnPostSignOutAsync()

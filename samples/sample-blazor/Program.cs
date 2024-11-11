@@ -47,8 +47,21 @@ app.MapGet("/SignIn", async context =>
 {
     if (!(context.User?.Identity?.IsAuthenticated ?? false))
     {
-        await context.ChallengeAsync(new AuthenticationProperties { RedirectUri = "/" });
-    } else {
+        var authProperties = new AuthenticationProperties 
+        { 
+            RedirectUri = "/" 
+        };
+
+        authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
+        authProperties.SetParameter("identifiers", string.Join(",", new[] 
+        { 
+            LogtoParameters.Authentication.Identifiers.Username,
+        }));
+
+        await context.ChallengeAsync(authProperties);
+    } 
+    else 
+    {
         context.Response.Redirect("/");
     }
 });

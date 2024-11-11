@@ -25,7 +25,18 @@ public class HomeController : Controller
 
     public IActionResult SignIn()
     {
-        return Challenge(new AuthenticationProperties { RedirectUri = "/" });
+        var authProperties = new AuthenticationProperties 
+        { 
+            RedirectUri = "/" 
+        };
+
+        authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.SignIn);
+        authProperties.SetParameter("identifiers", string.Join(",", new[] 
+        { 
+            LogtoParameters.Authentication.Identifiers.Username,
+        }));
+
+        return Challenge(authProperties);
     }
 
     // Use the `new` keyword to avoid conflict with the `ControllerBase.SignOut` method

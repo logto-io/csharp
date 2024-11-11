@@ -115,4 +115,57 @@ public static class LogtoParameters
     /// </summary>
     public const string Identities = "identities";
   }
+
+  /// <summary>
+  /// The authentication parameters for Logto sign-in experience customization.
+  /// </summary>
+  public static class Authentication
+  {
+    /// <summary>
+    /// The first screen to show in the sign-in experience.
+    /// </summary>
+    public static class FirstScreen
+    {
+      /// <summary>
+      /// Show the register form first.
+      /// </summary>
+      public const string Register = "identifier:register";
+
+      /// <summary>
+      /// Show the sign-in form first.
+      /// </summary>
+      public const string SignIn = "identifier:sign_in";
+
+      /// <summary>
+      /// Show the single sign-on form first.
+      /// </summary>
+      public const string SingleSignOn = "single_sign_on";
+
+      /// <summary>
+      /// Show the reset password form first.
+      /// </summary>
+      public const string ResetPassword = "reset_password";
+    }
+
+    /// <summary>
+    /// The identifiers to use for authentication.
+    /// </summary>
+    public static class Identifiers
+    {
+      /// <summary>
+      /// Use email for authentication.
+      /// </summary>
+      public const string Email = "email";
+      
+      /// <summary>
+      /// Use phone for authentication.
+      /// </summary>
+      public const string Phone = "phone";
+      
+      /// <summary>
+      /// Use username for authentication.
+      /// </summary>
+      public const string Username = "username";
+    }
+  }
 }
