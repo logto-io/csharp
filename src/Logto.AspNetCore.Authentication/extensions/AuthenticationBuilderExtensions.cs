@@ -114,6 +114,31 @@ public static class AuthenticationBuilderExtensions
           context.ProtocolMessage.Parameters.Add("identifiers", identifiers?.ToString());
         }
 
+        if (context.Properties.Parameters.TryGetValue("direct_sign_in", out var directSignIn))
+        {
+          var directSignInOption = System.Text.Json.JsonSerializer.Deserialize<LogtoParameters.Authentication.DirectSignIn>(
+            directSignIn?.ToString() ?? "{}"
+          );
+          if (directSignInOption != null && !string.IsNullOrEmpty(directSignInOption.Method) && !string.IsNullOrEmpty(directSignInOption.Target))
+          {
+            context.ProtocolMessage.Parameters.Add("direct_sign_in", $"{directSignInOption.Method}:{directSignInOption.Target}");
+          }
+        }
+
+        if (context.Properties.Parameters.TryGetValue("extra_params", out var extraParams))
+        {
+          var parameters = System.Text.Json.JsonSerializer.Deserialize<LogtoParameters.Authentication.ExtraParams>(
+            extraParams?.ToString() ?? "{}"
+          );
+          if (parameters != null)
+          {
+            foreach (var param in parameters)
+            {
+              context.ProtocolMessage.Parameters.Add(param.Key, param.Value);
+            }
+          }
+        }
+
         return Task.CompletedTask;
       },
       OnRedirectToIdentityProviderForSignOut = async context =>

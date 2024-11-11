@@ -1,6 +1,7 @@
 ﻿using Logto.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace sample.Pages;
 
@@ -32,6 +33,20 @@ public class IndexModel : PageModel
         { 
             LogtoParameters.Authentication.Identifiers.Username,
         }));
+
+        var directSignIn = new LogtoParameters.Authentication.DirectSignIn
+        {
+            Target = "github",
+            Method = LogtoParameters.Authentication.DirectSignIn.Methods.Social
+        };
+        authProperties.SetParameter("direct_sign_in", JsonSerializer.Serialize(directSignIn));
+
+        var extraParams = new LogtoParameters.Authentication.ExtraParams
+        {
+            { "utm_source", "website" },
+            { "utm_medium", "organic" }
+        };
+        authProperties.SetParameter("extra_params", JsonSerializer.Serialize(extraParams));
 
         await HttpContext.ChallengeAsync(authProperties);
     }

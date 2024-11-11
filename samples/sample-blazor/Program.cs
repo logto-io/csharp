@@ -58,6 +58,22 @@ app.MapGet("/SignIn", async context =>
             LogtoParameters.Authentication.Identifiers.Username,
         }));
 
+        // Set `direct_sign_in`
+        var directSignIn = new LogtoParameters.Authentication.DirectSignIn
+        {
+            Target = "github",
+            Method = LogtoParameters.Authentication.DirectSignIn.Methods.Social
+        };
+        authProperties.SetParameter("direct_sign_in", System.Text.Json.JsonSerializer.Serialize(directSignIn));
+
+        // Set `extra_params`
+        var extraParams = new LogtoParameters.Authentication.ExtraParams
+        {
+            { "utm_source", "website" },
+            { "utm_medium", "organic" }
+        };
+        authProperties.SetParameter("extra_params", System.Text.Json.JsonSerializer.Serialize(extraParams));
+
         await context.ChallengeAsync(authProperties);
     } 
     else 

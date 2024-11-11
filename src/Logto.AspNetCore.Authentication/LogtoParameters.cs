@@ -1,4 +1,5 @@
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Collections.Generic;
 
 namespace Logto.AspNetCore.Authentication;
 
@@ -166,6 +167,42 @@ public static class LogtoParameters
       /// Use username for authentication.
       /// </summary>
       public const string Username = "username";
+    }
+
+    /// <summary>
+    /// Direct sign-in configuration.
+    /// </summary>
+    public class DirectSignIn
+    {
+      /// <summary>
+      /// The target identifier for direct sign-in.
+      /// </summary>
+      public string Target { get; set; } = string.Empty;
+
+      /// <summary>
+      /// The sign-in method.
+      /// </summary>
+      public string Method { get; set; } = string.Empty;
+
+      public static class Methods
+      {
+        /// <summary>
+        /// Single sign-on method.
+        /// </summary>
+        public const string Sso = "sso";
+
+        /// <summary>
+        /// Social sign-in method.
+        /// </summary>
+        public const string Social = "social";
+      }
+    }
+
+    /// <summary>
+    /// Extra parameters to be passed to the authorization endpoint.
+    /// </summary>
+    public class ExtraParams : Dictionary<string, string>
+    {
     }
   }
 }
