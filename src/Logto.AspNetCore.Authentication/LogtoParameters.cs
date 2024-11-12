@@ -150,7 +150,7 @@ public static class LogtoParameters
 
     /// <summary>
     /// The identifiers to use for authentication.
-    /// Should work with <see cref="FirstScreen"/>.
+    /// This parameter MUST be used together with <see cref="FirstScreen"/>.
     /// </summary>
     public static class Identifiers
     {
