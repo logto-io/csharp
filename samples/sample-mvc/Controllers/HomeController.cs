@@ -31,7 +31,9 @@ public class HomeController : Controller
             RedirectUri = "/" 
         };
 
+        // Set the first screen, see https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#first-screen.
         authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
+        // Set the identifiers, should work with `first_screen`.
         authProperties.SetParameter("identifiers", string.Join(",", new[] 
         { 
             LogtoParameters.Authentication.Identifiers.Username,
@@ -42,14 +44,8 @@ public class HomeController : Controller
             Target = "github",
             Method = LogtoParameters.Authentication.DirectSignIn.Methods.Social
         };
+        // Set the direct sign-in, see https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#direct-sign-in.
         authProperties.SetParameter("direct_sign_in", JsonSerializer.Serialize(directSignIn));
-
-        var extraParams = new LogtoParameters.Authentication.ExtraParams
-        {
-            { "utm_source", "website" },
-            { "utm_medium", "organic" }
-        };
-        authProperties.SetParameter("extra_params", JsonSerializer.Serialize(extraParams));
 
         return Challenge(authProperties);
     }
