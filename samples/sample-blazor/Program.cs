@@ -54,7 +54,7 @@ app.MapGet("/SignIn", async context =>
 
         // Set the first screen, see https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#first-screen.
         authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
-        // Set the identifiers, should work with `first_screen`.
+        // Set the `identifiers`, this parameter MUST be used together with `first_screen`.
         authProperties.SetParameter("identifiers", string.Join(",", new[] 
         {
             LogtoParameters.Authentication.Identifiers.Username,
