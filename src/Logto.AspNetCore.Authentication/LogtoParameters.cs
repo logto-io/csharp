@@ -124,6 +124,7 @@ public static class LogtoParameters
   {
     /// <summary>
     /// The first screen to show in the sign-in experience.
+    /// See <see href="https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#first-screen"/> for more details.
     /// </summary>
     public static class FirstScreen
     {
@@ -172,6 +173,7 @@ public static class LogtoParameters
 
     /// <summary>
     /// Direct sign-in configuration.
+    /// See <see href="https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#direct-sign-in"/> for more details.
     /// </summary>
     public class DirectSignIn
     {

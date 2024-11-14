@@ -145,7 +145,6 @@ public static class AuthenticationBuilderExtensions
       {
         // Clean up the cookie when signing out.
         await context.HttpContext.SignOutAsync(cookieScheme);
-        
         // Rebuild parameters since we use <c>client_id</c> for sign-out, no need to use <c>id_token_hint</c>.
         context.ProtocolMessage.Parameters.Remove(OpenIdConnectParameterNames.IdTokenHint);
         context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.ClientId, logtoOptions.AppId);
