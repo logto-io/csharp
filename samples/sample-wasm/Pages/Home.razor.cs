@@ -1,19 +1,27 @@
 namespace sample_wasm.Pages;
+
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Blorc.OpenIdConnect;
 using Microsoft.AspNetCore.Components.Authorization;
+using sample_wasm.WeatherForecasts;
 
 [Authorize]
 public partial class Home : ComponentBase
 {
     [Inject]
     public required IUserManager UserManager { get; set; }
+
+    [Inject]
+    WeatherForecastHttpClient WeatherForecastHttpClient { get; set; }
+
     public TimeSpan? SignOutTimeSpan { get; set; }
 
     public User<Profile>? User { get; set; }
+
+    private WeatherForecast[] forecasts;
 
     [CascadingParameter]
     protected Task<AuthenticationState>? AuthenticationStateTask { get; set; }
@@ -24,6 +32,12 @@ public partial class Home : ComponentBase
 
         UserManager.UserActivity += OnUserManagerUserActivity;
         UserManager.UserInactivity += OnUserManagerUserInactivity;
+
+        if(User is not null)
+        { 
+            forecasts = await WeatherForecastHttpClient.GetForecastAsync();
+        }
+
     }
 
     private void OnUserManagerUserInactivity(object? sender, UserInactivityEventArgs args)

@@ -5,27 +5,26 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D44D6C8F-1A29-4796-930F-B37ADB539EA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logto.AspNetCore.Authentication", "src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj", "{D05B1B5F-D560-492A-A566-95888C8C5C43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logto.AspNetCore.Authentication", "src\Logto.AspNetCore.Authentication\Logto.AspNetCore.Authentication.csproj", "{D05B1B5F-D560-492A-A566-95888C8C5C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logto.AspNetCore.Authentication.Tests", "src\Logto.AspNetCore.Authentication.Tests\Logto.AspNetCore.Authentication.Tests.csproj", "{0A3281B7-4673-4FCC-A138-E72E92DCD57D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logto.AspNetCore.Authentication.Tests", "src\Logto.AspNetCore.Authentication.Tests\Logto.AspNetCore.Authentication.Tests.csproj", "{0A3281B7-4673-4FCC-A138-E72E92DCD57D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E138A45B-E985-4364-AA8A-86467AEE5693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-blazor", "samples\sample-blazor\sample-blazor.csproj", "{8B6A343E-7691-468E-89D0-7A3EFACAADC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample-blazor", "samples\sample-blazor\sample-blazor.csproj", "{8B6A343E-7691-468E-89D0-7A3EFACAADC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-mvc", "samples\sample-mvc\sample-mvc.csproj", "{64A4D492-3ABB-410C-AE0D-6F9A8881B100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample-mvc", "samples\sample-mvc\sample-mvc.csproj", "{64A4D492-3ABB-410C-AE0D-6F9A8881B100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-wasm", "samples\sample-wasm\sample-wasm.csproj", "{CFF04115-513A-4A6F-BA07-C45EC28BDB63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample-wasm", "samples\sample-wasm\sample-wasm.csproj", "{CFF04115-513A-4A6F-BA07-C45EC28BDB63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample", "samples\sample\sample.csproj", "{72761E5E-12B5-4FB8-AE83-77AEEE38D864}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample", "samples\sample\sample.csproj", "{72761E5E-12B5-4FB8-AE83-77AEEE38D864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-webapi", "samples\sample-webapi\sample-webapi.csproj", "{FF17629C-03A0-4D82-B571-51ED92A986B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D05B1B5F-D560-492A-A566-95888C8C5C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -52,6 +51,13 @@ Global
 		{72761E5E-12B5-4FB8-AE83-77AEEE38D864}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72761E5E-12B5-4FB8-AE83-77AEEE38D864}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72761E5E-12B5-4FB8-AE83-77AEEE38D864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF17629C-03A0-4D82-B571-51ED92A986B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF17629C-03A0-4D82-B571-51ED92A986B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF17629C-03A0-4D82-B571-51ED92A986B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF17629C-03A0-4D82-B571-51ED92A986B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D05B1B5F-D560-492A-A566-95888C8C5C43} = {D44D6C8F-1A29-4796-930F-B37ADB539EA3}
@@ -60,5 +66,9 @@ Global
 		{64A4D492-3ABB-410C-AE0D-6F9A8881B100} = {E138A45B-E985-4364-AA8A-86467AEE5693}
 		{CFF04115-513A-4A6F-BA07-C45EC28BDB63} = {E138A45B-E985-4364-AA8A-86467AEE5693}
 		{72761E5E-12B5-4FB8-AE83-77AEEE38D864} = {E138A45B-E985-4364-AA8A-86467AEE5693}
+		{FF17629C-03A0-4D82-B571-51ED92A986B6} = {E138A45B-E985-4364-AA8A-86467AEE5693}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11FAC7DD-230E-46E8-9B06-D29A3D043F63}
 	EndGlobalSection
 EndGlobal

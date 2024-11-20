@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blorc.OpenIdConnect;
 using Blorc.Services;
 using sample_wasm;
+using sample_wasm.WeatherForecasts;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -17,6 +18,10 @@ builder.Services.AddBlorcOpenIdConnect(
     {
         builder.Configuration.Bind("IdentityServer", options);
     });
+
+builder.Services
+    .AddHttpClient<WeatherForecastHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5150/"))
+    .AddAccessToken(); // to get a token that will be sent to the API
 
 var webAssemblyHost = builder.Build();
 
