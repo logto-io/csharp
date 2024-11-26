@@ -111,7 +111,13 @@ public static class AuthenticationBuilderExtensions
 
         if (context.Properties.Parameters.TryGetValue("identifiers", out var identifiers))
         {
-          context.ProtocolMessage.Parameters.Add("identifiers", identifiers?.ToString());
+          var identifierArray = System.Text.Json.JsonSerializer.Deserialize<string[]>(
+            identifiers?.ToString() ?? "[]"
+          );
+          if (identifierArray?.Length > 0)
+          {
+            context.ProtocolMessage.Parameters.Add("identifier", string.Join(" ", identifierArray));
+          }
         }
 
         if (context.Properties.Parameters.TryGetValue("direct_sign_in", out var directSignIn))

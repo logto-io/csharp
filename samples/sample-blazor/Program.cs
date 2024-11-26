@@ -54,12 +54,12 @@ app.MapGet("/SignIn", async context =>
 
         /// <see href="https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#first-screen"/>
         /// <see cref="LogtoParameters.Authentication.FirstScreen"/>
-        authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
+        authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.SignIn);
         
-        // This parameter MUST be used together with `first_screen`.
-        authProperties.SetParameter("identifiers", string.Join(",", new[] 
+        authProperties.SetParameter("identifiers", System.Text.Json.JsonSerializer.Serialize(new[] 
         {
             LogtoParameters.Authentication.Identifiers.Username,
+            LogtoParameters.Authentication.Identifiers.Email,
         }));
 
         var directSignIn = new LogtoParameters.Authentication.DirectSignIn

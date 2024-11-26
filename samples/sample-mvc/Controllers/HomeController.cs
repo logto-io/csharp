@@ -35,8 +35,7 @@ public class HomeController : Controller
         /// <see cref="LogtoParameters.Authentication.FirstScreen"/>
         authProperties.SetParameter("first_screen", LogtoParameters.Authentication.FirstScreen.Register);
         
-        // This parameter MUST be used together with `first_screen`.
-        authProperties.SetParameter("identifiers", string.Join(",", new[] 
+        authProperties.SetParameter("identifiers", JsonSerializer.Serialize(new[] 
         {
             LogtoParameters.Authentication.Identifiers.Username,
         }));
