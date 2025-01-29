@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Extension methods to configure Logto authentication.
@@ -101,11 +102,49 @@ public static class AuthenticationBuilderExtensions
     options.ClaimActions.MapAllExcept("nbf", "nonce", "c_hash", "at_hash");
     options.Events = new OpenIdConnectEvents
     {
+      OnRedirectToIdentityProvider = context =>
+      {
+        if (context.Properties.Parameters.TryGetValue("first_screen", out var firstScreen))
+        {
+          context.ProtocolMessage.Parameters.Add("first_screen", firstScreen?.ToString());
+        }
+
+        if (context.Properties.Parameters.TryGetValue("identifiers", out var identifiers))
+        {
+          context.ProtocolMessage.Parameters.Add("identifiers", identifiers?.ToString());
+        }
+
+        if (context.Properties.Parameters.TryGetValue("direct_sign_in", out var directSignIn))
+        {
+          var directSignInOption = System.Text.Json.JsonSerializer.Deserialize<LogtoParameters.Authentication.DirectSignIn>(
+            directSignIn?.ToString() ?? "{}"
+          );
+          if (directSignInOption != null && !string.IsNullOrEmpty(directSignInOption.Method) && !string.IsNullOrEmpty(directSignInOption.Target))
+          {
+            context.ProtocolMessage.Parameters.Add("direct_sign_in", $"{directSignInOption.Method}:{directSignInOption.Target}");
+          }
+        }
+
+        if (context.Properties.Parameters.TryGetValue("extra_params", out var extraParams))
+        {
+          var parameters = System.Text.Json.JsonSerializer.Deserialize<LogtoParameters.Authentication.ExtraParams>(
+            extraParams?.ToString() ?? "{}"
+          );
+          if (parameters != null)
+          {
+            foreach (var param in parameters)
+            {
+              context.ProtocolMessage.Parameters.Add(param.Key, param.Value);
+            }
+          }
+        }
+
+        return Task.CompletedTask;
+      },
       OnRedirectToIdentityProviderForSignOut = async context =>
       {
         // Clean up the cookie when signing out.
         await context.HttpContext.SignOutAsync(cookieScheme);
-
         // Rebuild parameters since we use <c>client_id</c> for sign-out, no need to use <c>id_token_hint</c>.
         context.ProtocolMessage.Parameters.Remove(OpenIdConnectParameterNames.IdTokenHint);
         context.ProtocolMessage.Parameters.Add(OpenIdConnectParameterNames.ClientId, logtoOptions.AppId);

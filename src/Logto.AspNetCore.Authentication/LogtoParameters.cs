@@ -1,4 +1,5 @@
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.Collections.Generic;
 
 namespace Logto.AspNetCore.Authentication;
 
@@ -114,5 +115,97 @@ public static class LogtoParameters
     /// The claim name for user's identities.
     /// </summary>
     public const string Identities = "identities";
+  }
+
+  /// <summary>
+  /// The authentication parameters for Logto sign-in experience customization.
+  /// </summary>
+  public static class Authentication
+  {
+    /// <summary>
+    /// The first screen to show in the sign-in experience.
+    /// See <see href="https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#first-screen"/> for more details.
+    /// </summary>
+    public static class FirstScreen
+    {
+      /// <summary>
+      /// Show the register form first.
+      /// </summary>
+      public const string Register = "identifier:register";
+
+      /// <summary>
+      /// Show the sign-in form first.
+      /// </summary>
+      public const string SignIn = "identifier:sign_in";
+
+      /// <summary>
+      /// Show the single sign-on form first.
+      /// </summary>
+      public const string SingleSignOn = "single_sign_on";
+
+      /// <summary>
+      /// Show the reset password form first.
+      /// </summary>
+      public const string ResetPassword = "reset_password";
+    }
+
+    /// <summary>
+    /// The identifiers to use for authentication.
+    /// This parameter MUST be used together with <see cref="FirstScreen"/>.
+    /// </summary>
+    public static class Identifiers
+    {
+      /// <summary>
+      /// Use email for authentication.
+      /// </summary>
+      public const string Email = "email";
+      
+      /// <summary>
+      /// Use phone for authentication.
+      /// </summary>
+      public const string Phone = "phone";
+      
+      /// <summary>
+      /// Use username for authentication.
+      /// </summary>
+      public const string Username = "username";
+    }
+
+    /// <summary>
+    /// Direct sign-in configuration.
+    /// See <see href="https://docs.logto.io/docs/references/openid-connect/authentication-parameters/#direct-sign-in"/> for more details.
+    /// </summary>
+    public class DirectSignIn
+    {
+      /// <summary>
+      /// The target identifier for direct sign-in.
+      /// </summary>
+      public string Target { get; set; } = string.Empty;
+
+      /// <summary>
+      /// The sign-in method.
+      /// </summary>
+      public string Method { get; set; } = string.Empty;
+
+      public static class Methods
+      {
+        /// <summary>
+        /// Single sign-on method.
+        /// </summary>
+        public const string Sso = "sso";
+
+        /// <summary>
+        /// Social sign-in method.
+        /// </summary>
+        public const string Social = "social";
+      }
+    }
+
+    /// <summary>
+    /// Extra parameters to be passed to the authorization endpoint.
+    /// </summary>
+    public class ExtraParams : Dictionary<string, string>
+    {
+    }
   }
 }
